@@ -4,6 +4,7 @@ import com.germanheinz.microservices.servicesitems.models.Item;
 import com.germanheinz.microservices.servicesitems.models.Product;
 import com.germanheinz.microservices.servicesitems.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ItemServicesImpl  implements ItemService {
+public class ItemServicesImpl implements ItemService {
 
     @Autowired
     private RestTemplate restTemplate;

@@ -2,7 +2,9 @@ package com.germanheinz.microservices.servicesitems;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//test
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+@EnableFeignClients
 @SpringBootApplication
 public class ServicesItemsApplication {
 
