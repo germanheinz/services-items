@@ -4,14 +4,12 @@ import com.germanheinz.microservices.servicesitems.clients.ProductClientsRest;
 import com.germanheinz.microservices.servicesitems.models.Item;
 import com.germanheinz.microservices.servicesitems.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("serviceFeign")
-@Primary
+@Service("servicesFeign")
 public class ItemServiceFeign implements ItemService {
 
     @Autowired
