@@ -21,11 +21,10 @@ public class ItemServicesImpl  implements ItemService {
 
     @Override
     public List<Item> findAll() {
-        List<Product> products = Arrays.asList(restTemplate.getForObject("http://localhost:8080/findAll", Product[].class));
+        List<Product> products = Arrays.asList(restTemplate.getForObject("http://localhost:8001/findAll", Product[].class));
 
         //Convert Product object to Item Object
         return products.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
-
     }
 
     @Override
@@ -33,7 +32,7 @@ public class ItemServicesImpl  implements ItemService {
         Map<String, String> pathVariables = new HashMap<String, String>();
         pathVariables.put("id", id.toString());
 
-        Product product = restTemplate.getForObject("http://localhost:8080/findById/{id}", Product.class);
+        Product product = restTemplate.getForObject("http://localhost:8001/find/{id}", Product.class, pathVariables);
         return new Item(product, quantity);
     }
 }

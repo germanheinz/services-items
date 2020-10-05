@@ -20,7 +20,7 @@ public class ItemController {
         return itemService.findAll();
     }
 
-    @GetMapping("/detail/{id}/{quantity}")
+    @GetMapping("/detail/{id}/quantity/{quantity}")
     public Item getDetail(@PathVariable Long id, @PathVariable Integer quantity){
         return  itemService.findById(id, quantity);
     }
