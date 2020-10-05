@@ -13,8 +13,8 @@ import java.util.List;
 @RestController
 public class ItemController {
 
+    @Qualifier("servicesFeign")
     @Autowired
-    @Qualifier("serviceFeign")
     private ItemService itemService;
 
     @GetMapping("/findAllItems")
