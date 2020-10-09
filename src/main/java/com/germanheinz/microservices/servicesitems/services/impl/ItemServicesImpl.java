@@ -4,6 +4,9 @@ import com.germanheinz.microservices.servicesitems.models.Item;
 import com.germanheinz.microservices.servicesitems.models.Product;
 import com.germanheinz.microservices.servicesitems.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,5 +37,28 @@ public class ItemServicesImpl implements ItemService {
 
         Product product = restTemplate.getForObject("http://services-products/find/{id}", Product.class, pathVariables);
         return new Item(product, quantity);
+    }
+
+    @Override
+    public Product save(Product product) {
+        HttpEntity<Product> body =  new HttpEntity<Product>(product);
+        ResponseEntity<Product> response = restTemplate.exchange("http://services-products/save", HttpMethod.POST, body, Product.class);
+        return response.getBody();
+    }
+
+    @Override
+    public Product update(Product product, Long id) {
+        Map<String, String> pathVariables = new HashMap<String, String>();
+        pathVariables.put("id", id.toString());
+        HttpEntity<Product> body =  new HttpEntity<Product>(product);
+        ResponseEntity<Product> response = restTemplate.exchange("http://services-products/edit/{id}", HttpMethod.PUT, body, Product.class, pathVariables);
+        return response.getBody();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Map<String, String> pathVariables = new HashMap<String, String>();
+        pathVariables.put("id", id.toString());
+        restTemplate.delete("http://services-products/delete/{id}", pathVariables);
     }
 }

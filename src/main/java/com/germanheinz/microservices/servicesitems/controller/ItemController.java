@@ -13,9 +13,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -48,6 +46,21 @@ public class ItemController {
         return  itemService.findById(id, quantity);
     }
 
+    @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product save(@RequestBody Product product){
+        return itemService.save(product);
+    }
+
+    @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product edit(@RequestBody Product product, @PathVariable Long id){
+        return itemService.update(product, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){ itemService.delete(id);}
 
     public Item alternativeMethod(Long id, Integer quantity, Throwable hystrixCommand){
         Product pro = new Product();
